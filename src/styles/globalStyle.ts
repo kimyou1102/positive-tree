@@ -14,7 +14,37 @@ const GlobalStyle = createGlobalStyle`
       text-decoration: none;
     }
 
-    .dots_custom {
+    .slick-slide > div {
+      padding: 0px 11px;
+    } 
+
+    .slick-arrow:before {
+    content: '';
+}
+
+    /* .slick-active {
+
+    } */
+/* 
+    .slick-initialized {
+      overflow: hidden;
+    } */
+/* 
+    .slick-active > div {
+      width: 250px;
+    } */
+
+    /* .slick-slide {
+        margin:0 20px;
+    } */
+
+    /* .center .slick-center {
+    color: #e67e22;
+    opacity: 1;
+    transform: scale(1.06);
+  } */
+
+    /* .dots_custom {
       width: 100%;
       position: absolute;
       bottom: 18px;
@@ -57,7 +87,7 @@ const GlobalStyle = createGlobalStyle`
     .slick-next::before {
       opacity: 0;
       display: none;
-    }
+    } */
       
     @font-face {
         font-family: 'PretendardBold';

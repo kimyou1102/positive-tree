@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { A } from '@atoms';
 
 const Container = styled.ul`
   list-style-type: none;
@@ -8,11 +9,11 @@ const Container = styled.ul`
   width: calc(17.375rem * 0.8);
   li {
     font-size: 1rem;
-    font-weight: bold;
   }
 `;
 
 const StyledButton = styled.button`
+  font-weight: bold;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -22,16 +23,24 @@ export function Menu() {
   return (
     <Container>
       <li>
-        <StyledButton type="button">오늘오픈</StyledButton>
+        <StyledButton type="button">
+          <A url="/">오늘오픈</A>
+        </StyledButton>
       </li>
       <li>
-        <StyledButton type="button">기자단</StyledButton>
+        <StyledButton type="button">
+          <A url="/">기자단</A>
+        </StyledButton>
       </li>
       <li>
-        <StyledButton type="button">유튜브</StyledButton>
+        <StyledButton type="button">
+          <A url="/">유튜브</A>
+        </StyledButton>
       </li>
       <li>
-        <StyledButton type="button">이벤트</StyledButton>
+        <StyledButton type="button">
+          <A url="/">이벤트</A>
+        </StyledButton>
       </li>
     </Container>
   );
