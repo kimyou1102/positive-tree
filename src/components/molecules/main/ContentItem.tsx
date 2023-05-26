@@ -45,8 +45,6 @@ const RankWrap = styled.div`
 `;
 
 export function ContentItem({ src, rank, title, description, startDate, endDate }: ContentItemProps) {
-  const today = new Date();
-
   const props = { title, description, startDate, endDate };
   return (
     <Container>

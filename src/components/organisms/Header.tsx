@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FlexContainer } from '@atoms';
+import { Outlet } from 'react-router-dom';
+import { FlexContainer, A } from '@atoms';
 import { Menu, UserButton, SearchBar } from '@molecules';
 import logo from '../../assets/images/header_logo.png';
 
@@ -20,15 +21,20 @@ export function Header() {
   const [value, setValue] = useState<string>('');
 
   return (
-    <Container>
-      <FlexContainer align="center">
-        <StyleLogo src={logo} alt="로고" />
-        <Menu />
-      </FlexContainer>
-      <FlexContainer align="center">
-        <SearchBar value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
-        <UserButton />
-      </FlexContainer>
-    </Container>
+    <>
+      <Container>
+        <FlexContainer align="center">
+          <A url="/">
+            <StyleLogo src={logo} alt="로고" />
+          </A>
+          <Menu />
+        </FlexContainer>
+        <FlexContainer align="center">
+          <SearchBar value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
+          <UserButton />
+        </FlexContainer>
+      </Container>
+      <Outlet />
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
+import styled from 'styled-components';
 import { ContentItem } from '@molecules';
-import { ArrowButton, SlideContainer } from '@atoms';
+import { ArrowButton, SlideContainer, Span } from '@atoms';
 import { useRecoilState } from 'recoil';
 import Slider from 'react-slick';
 import { PopularScrollState } from '../../recoil/main/scroll';
@@ -26,6 +27,12 @@ interface PopularCampaignSlideProps {
   scroll: HTMLDivElement | undefined;
   setScroll: any;
 }
+
+const Text = styled.p`
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+`;
 
 // export function PopularCampaignSlide({ title, scroll, setScroll }:) {
 export function PopularCampaignSlide({ datas, title, scroll, setScroll }: PopularCampaignSlideProps) {
@@ -53,23 +60,27 @@ export function PopularCampaignSlide({ datas, title, scroll, setScroll }: Popula
     }
   };
 
-  // 1.2rem
+  const [title1, title2] = title.split(',');
 
   return (
-    <div>
-      <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{title}</p>
+    <>
+      {title === '지금 인기있는 캠페인' ? (
+        <Text>{title}</Text>
+      ) : (
+        <Text>
+          <Span color="#EA9DCC" size={1.5} weight="bold">
+            {`${title1} `}
+          </Span>
+          <Span size={1.5} weight="bold">
+            {title2}
+          </Span>
+        </Text>
+      )}
+
       <div style={{ position: 'relative' }}>
         <ArrowButton type="left" src={leftArrow} onClick={onLeftClick} top="calc(17.625rem * 0.9 / 2)" />
         <ArrowButton type="right" src={rightArrow} onClick={onRightClick} top="calc(17.625rem * 0.9 / 2)" />
         <SlideContainer ref={scrollRef}>
-          {/* <ContentItem {...test} />
-          <ContentItem {...test} />
-          <ContentItem {...test} />
-          <ContentItem {...test} />
-          <ContentItem {...test} />
-          <ContentItem {...test} />
-          <ContentItem {...test} />
-          <ContentItem {...test} /> */}
           {datas.map((data) => (
             <ContentItem
               src={data.src}
@@ -83,6 +94,6 @@ export function PopularCampaignSlide({ datas, title, scroll, setScroll }: Popula
           ))}
         </SlideContainer>
       </div>
-    </div>
+    </>
   );
 }
