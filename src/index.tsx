@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { MainPage } from '@pages';
+import { MainPage, ShopDetailPage } from '@pages';
 import { Header } from '@organisms';
 import App from './App';
 import GlobalStyle from './styles/globalStyle';
@@ -15,6 +15,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Header />}>
           <Route path="/" element={<App />} />
+          <Route path="/shop-detail/:id" element={<ShopDetailPage />} />
           <Route path="/home" element={<MainPage />} />
         </Route>
       </Routes>
