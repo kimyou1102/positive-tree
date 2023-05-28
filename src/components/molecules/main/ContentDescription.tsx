@@ -5,8 +5,8 @@ import { FlexContainer, Span } from '@atoms';
 interface ContentDescriptionProps {
   title: string;
   description: string;
-  startDate: string;
-  endDate: string;
+  applicationDateStart: string;
+  applicationDateEnd: string;
 }
 
 const Dday = styled.div<{ check: boolean }>`
@@ -32,9 +32,14 @@ const Title = styled.p`
   margin-bottom: 0.25rem;
 `;
 
-export function ContentDescription({ title, description, startDate, endDate }: ContentDescriptionProps) {
+export function ContentDescription({
+  title,
+  description,
+  applicationDateStart,
+  applicationDateEnd,
+}: ContentDescriptionProps) {
   const today = new Date();
-  const compareDay = new Date(endDate);
+  const compareDay = new Date(applicationDateEnd);
 
   const isSameDate = (date1: Date, date2: Date) => {
     return (
@@ -59,7 +64,7 @@ export function ContentDescription({ title, description, startDate, endDate }: C
         {description}
       </Span>
       <Span size={0.625} color="#767676">
-        캠페인 신청기간{startDate}~{endDate}
+        캠페인 신청기간{applicationDateStart}~{applicationDateEnd}
       </Span>
     </FlexContainer>
   );

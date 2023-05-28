@@ -5,8 +5,8 @@ import leftArrow from '../../../assets/images/leftArrow.png';
 import rightArrow from '../../../assets/images/rightArrow.png';
 
 type DataType = {
-  id: number;
-  src: string;
+  // id: number;
+  image: string;
 };
 
 interface PhotoSlideProps {
@@ -36,11 +36,18 @@ export function PhotoSlide({ datas }: PhotoSlideProps) {
   };
   return (
     <div style={{ position: 'relative' }}>
-      <ArrowButton type="left" src={leftArrow} onClick={onLeftClick} top="calc(20.625rem * 0.8/ 2)" />
-      <ArrowButton type="right" src={rightArrow} onClick={onRightClick} top="calc(20.625rem * 0.8/ 2)" />
+      <ArrowButton type="left top" src={leftArrow} onClick={onLeftClick} top="calc(20.625rem * 0.8/ 2)" />
+      <ArrowButton
+        type="left top"
+        src={rightArrow}
+        onClick={onRightClick}
+        top="calc(20.625rem * 0.8/ 2)"
+        left="60rem"
+        transform="translate(-50%, -50%)"
+      />
       <SlideContainer ref={scrollRef}>
         {datas.map((data) => (
-          <Img key={data.id} alt="사진" src={data.src} />
+          <Img key={data.image} alt="사진" src={data.image} />
         ))}
       </SlideContainer>
     </div>
