@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { ArrowButton, SlideContainer, Span } from '@atoms';
+import { ArrowButton, SlideContainer, Span, A, FlexContainer } from '@atoms';
 import { CampaignItem } from '@molecules';
 import photo from '../../assets/images/campaign.png';
 import photo2 from '../../assets/images/campaign2.png';
@@ -48,17 +48,29 @@ export function HighlyCampaign({ title }: HighlyCampaignProps) {
   };
   return (
     <>
-      <Text>
-        <Span color="#EA9DCC" size={1.5} weight="bold">
-          {`${title1} `}
+      <FlexContainer width={75} justify="space-between" align="center">
+        <Text>
+          <Span color="#EA9DCC" size={1.5} weight="bold">
+            {`${title1} `}
+          </Span>
+          <Span size={1.5} weight="bold">
+            {title2}
+          </Span>
+        </Text>
+        <Span size={0.875} weight="bold">
+          <A url="#">전체보기</A>
         </Span>
-        <Span size={1.5} weight="bold">
-          {title2}
-        </Span>
-      </Text>
+      </FlexContainer>
       <div style={{ position: 'relative' }}>
-        <ArrowButton type="left" src={leftArrow} onClick={onLeftClick} top="calc( 9.6rem  / 2)" />
-        <ArrowButton type="right" src={rightArrow} onClick={onRightClick} top="calc( 9.6rem / 2)" />
+        <ArrowButton type="left top" src={leftArrow} onClick={onLeftClick} top="calc( 9.6rem  / 2)" />
+        <ArrowButton
+          type="left top"
+          src={rightArrow}
+          onClick={onRightClick}
+          top="calc( 9.6rem / 2)"
+          transform="translate(-50%, -50%)"
+          left="60rem"
+        />
         <SlideContainer ref={scrollRef}>
           {test.map((item) => (
             <CampaignItem key={item.id} {...item} />
