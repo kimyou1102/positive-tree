@@ -5,3 +5,4 @@ export * from './Footer';
 export * from './HighlyCampaign';
 export * from './DetailSide';
 export * from './DetailContents';
+export * from './ListHeader';
