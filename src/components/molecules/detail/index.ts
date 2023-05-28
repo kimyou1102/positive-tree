@@ -4,3 +4,4 @@ export * from './CalendarDetail';
 export * from './CalendarDate';
 export * from './Map';
 export * from './DatailDescription';
+export * from './PhotoList';
