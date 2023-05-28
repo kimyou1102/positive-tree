@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { ContentItem } from '@molecules';
-import { ArrowButton, SlideContainer, Span } from '@atoms';
+import { ArrowButton, SlideContainer, Span, A, FlexContainer } from '@atoms';
 import { useRecoilState } from 'recoil';
 import Slider from 'react-slick';
 import { PopularScrollState } from '../../recoil/main/scroll';
@@ -16,8 +16,9 @@ type DataType = {
   src: string;
   rank: number;
   title: string;
-  startDate: string;
-  endDate: string;
+  applicationDateStart: string;
+  applicationDateEnd: string;
+  category: string;
   description: string;
 };
 
@@ -34,7 +35,6 @@ const Text = styled.p`
   margin-bottom: 1rem;
 `;
 
-// export function PopularCampaignSlide({ title, scroll, setScroll }:) {
 export function PopularCampaignSlide({ datas, title, scroll, setScroll }: PopularCampaignSlideProps) {
   //   const [scroll, setScroll] = useRecoilState<HTMLDivElement | undefined>(PopularScrollState);
 
@@ -64,32 +64,45 @@ export function PopularCampaignSlide({ datas, title, scroll, setScroll }: Popula
 
   return (
     <>
-      {title === '지금 인기있는 캠페인' ? (
-        <Text>{title}</Text>
-      ) : (
-        <Text>
-          <Span color="#EA9DCC" size={1.5} weight="bold">
-            {`${title1} `}
-          </Span>
-          <Span size={1.5} weight="bold">
-            {title2}
-          </Span>
-        </Text>
-      )}
-
+      <FlexContainer width={75} justify="space-between" align="center">
+        {title === '지금 인기있는 캠페인' ? (
+          <Text>{title}</Text>
+        ) : (
+          <Text>
+            <Span color="#EA9DCC" size={1.5} weight="bold">
+              {`${title1} `}
+            </Span>
+            <Span size={1.5} weight="bold">
+              {title2}
+            </Span>
+          </Text>
+        )}
+        <Span size={0.875} weight="bold">
+          <A url="#">전체보기</A>
+        </Span>
+      </FlexContainer>
       <div style={{ position: 'relative' }}>
-        <ArrowButton type="left" src={leftArrow} onClick={onLeftClick} top="calc(17.625rem * 0.9 / 2)" />
-        <ArrowButton type="right" src={rightArrow} onClick={onRightClick} top="calc(17.625rem * 0.9 / 2)" />
+        <ArrowButton type="left top" src={leftArrow} onClick={onLeftClick} top="calc(17.625rem * 0.9 / 2)" />
+        <ArrowButton
+          type="left top"
+          src={rightArrow}
+          onClick={onRightClick}
+          top="calc(17.625rem * 0.9 / 2)"
+          left="60rem"
+        />
         <SlideContainer ref={scrollRef}>
           {datas.map((data) => (
             <ContentItem
+              id={data.id}
+              category={data.category}
+              type="main"
               src={data.src}
               key={data.id}
               rank={data.rank}
               title={data.title}
               description={data.description}
-              startDate={data.startDate}
-              endDate={data.endDate}
+              applicationDateStart={data.applicationDateStart}
+              applicationDateEnd={data.applicationDateEnd}
             />
           ))}
         </SlideContainer>
