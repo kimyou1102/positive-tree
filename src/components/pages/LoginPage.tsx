@@ -16,8 +16,6 @@ export default function LoginPage() {
 
   return (
     <div>
-      <Header />
-
       <LoginContainer>
         <LoginBox>
           <H3 font="PretendardBold" size={2}>

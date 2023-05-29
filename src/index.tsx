@@ -2,7 +2,6 @@ import React from 'react';
 import LoginPage from '@pages/LoginPage';
 import SignupPage from '@pages/SignupPage';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MainPage, RestaurantDetailPage, ProductDetailPage, ProductListPage, RestaurantListPage } from '@pages';
@@ -18,13 +17,13 @@ root.render(
       <Routes>
         <Route path="/" element={<Header />}>
           {/* <Route path="/" element={<App />} /> */}
-         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-           <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/restaurant" element={<RestaurantListPage />} />
           <Route path="/restaurant/:id" element={<RestaurantDetailPage />} />
           <Route path="/product" element={<ProductListPage />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

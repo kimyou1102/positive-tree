@@ -18,6 +18,7 @@ const Container = styled.button<{ bgColor: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   img {
     width: calc(6.25rem * 0.8);

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { A } from '@atoms';
 import { MainItem } from './MainItem';
+
 import icon1 from '../../../assets/images/item1.png';
 import icon2 from '../../../assets/images/icon2.png';
 import icon3 from '../../../assets/images/icon3.png';
@@ -20,11 +22,15 @@ export function MainItemList() {
   return (
     <Container>
       <MainItem src={icon1} bgColor="#EEF6B8" title="이용가이드" />
-      <MainItem src={icon2} bgColor="#FAF0C5" title="맛집" />
+      <A url="/restaurant">
+        <MainItem src={icon2} bgColor="#FAF0C5" title="맛집" />
+      </A>
       <MainItem src={icon3} bgColor="#D6E6FF" title="여행" />
       <MainItem src={icon4} bgColor="#D7F5EE" title="뷰티" />
       <MainItem src={icon5} bgColor="#DAF1FB" title="문화" />
-      <MainItem src={icon6} bgColor="#DDF5D4" title="제품" />
+      <A url="/product">
+        <MainItem src={icon6} bgColor="#DDF5D4" title="제품" />
+      </A>
       <MainItem src={icon7} bgColor="#EEF6B8" title="광고 문의" />
     </Container>
   );

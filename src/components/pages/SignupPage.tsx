@@ -25,8 +25,6 @@ function SignupPage() {
 
   return (
     <div>
-      <Header />
-
       <SignupContainer>
         <LoginBox>
           <H3 font="PretendardBold" size={2}>
