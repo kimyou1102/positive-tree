@@ -50,6 +50,18 @@ const InfoWrap = styled.div`
   width: 13rem;
 `;
 
+const TextWrap = styled.div<{ bgColor: string }>`
+  display: flex;
+  align-items: center;
+
+  div {
+    width: 20px;
+    height: 20px;
+    background: ${(props) => props.bgColor};
+    margin-right: 5px;
+  }
+`;
+
 export function DetailSide({
   requestStartDate,
   requestEndDate,
@@ -68,15 +80,24 @@ export function DetailSide({
     <Container>
       <CalendarSectionWrap>
         <InfoWrap>
-          <Span size={0.875}>신청기간</Span>
+          <TextWrap bgColor="rgb(9, 84, 79)">
+            <div />
+            <Span size={0.875}>신청기간</Span>
+          </TextWrap>
           <Span size={0.875}>{`${requestStartDate.slice(5).replace('-', '.')} ~ ${requestEndDate
             .slice(5)
             .replace('-', '.')}`}</Span>
-          <Span size={0.875}>체험기간</Span>
+          <TextWrap bgColor="rgb(254, 187, 228)">
+            <div />
+            <Span size={0.875}>체험기간</Span>
+          </TextWrap>
           <Span size={0.875}>{`${registerStartDate.slice(5).replace('-', '.')} ~ ${registerEndDate
             .slice(5)
             .replace('-', '.')}`}</Span>
-          <Span size={0.875}>결과발표</Span>
+          <TextWrap bgColor="rgb(84, 42, 1)">
+            <div />
+            <Span size={0.875}>결과발표</Span>
+          </TextWrap>
           <Span size={0.875}>{`${resultDate.slice(5).replace('-', '.')}`}</Span>
         </InfoWrap>
         <Calendar {...props} />

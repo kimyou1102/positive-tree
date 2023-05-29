@@ -12,19 +12,11 @@ interface CalendarDateProps {
 
 const DateWrapWrap = styled.div`
   width: calc(100% / 7);
-  /* position: relative;
-  box-sizing: border-box;
-  width: calc(100% / 7);
-  height: calc(3.438rem * 0.8);
-  text-align: left;
-  border-bottom: 1px solid #dbdbdb;
-  border-right: 1px solid #dbdbdb; */
 `;
 
 const DateWrap = styled.div`
   position: relative;
   box-sizing: border-box;
-  /* width: calc(100% / 7); */
   height: calc(3.438rem * 0.8);
   text-align: left;
   border-bottom: 1px solid #dbdbdb;
@@ -65,7 +57,7 @@ function CalendarDate({ year, month, dates, requestPeriod, registerPeriod, resul
             <DateDiv>
               <DateText>{date}</DateText>
             </DateDiv>
-            {requestPeriod.map((periodDate) =>
+            {requestPeriod.map((periodDate, i) =>
               `${year}-${compareMonth}-${date < 10 ? `0${date}` : date}` === periodDate ? (
                 <Highlight key={periodDate} bgColor="#09544F" color="white" />
               ) : null,
@@ -75,11 +67,7 @@ function CalendarDate({ year, month, dates, requestPeriod, registerPeriod, resul
                 <Highlight key={periodDate} bgColor="#FEBBE4" color="black" />
               ) : null,
             )}
-            {`${year}-${compareMonth}-${date}` === resultDate ? (
-              <Highlight bgColor="#542A01" color="white">
-                결과
-              </Highlight>
-            ) : null}
+            {`${year}-${compareMonth}-${date}` === resultDate ? <Highlight bgColor="#542A01" color="white" /> : null}
           </DateWrap>
         </DateWrapWrap>
       ))}
@@ -88,7 +76,3 @@ function CalendarDate({ year, month, dates, requestPeriod, registerPeriod, resul
 }
 
 export default CalendarDate;
-
-// 6월 1일
-// 비키 사용자 & 어드민 -> 6월 8일
-// 상영작 관리 시간표, 공지사항은 머.....
