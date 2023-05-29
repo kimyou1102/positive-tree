@@ -5,8 +5,8 @@ import { FlexContainer, Span } from '@atoms';
 interface ContentDescriptionProps {
   title: string;
   description: string;
-  startDate: string;
-  endDate: string;
+  applicationDateStart: string;
+  applicationDateEnd: string;
 }
 
 const Dday = styled.div<{ check: boolean }>`
@@ -15,12 +15,15 @@ const Dday = styled.div<{ check: boolean }>`
   width: calc(4rem * 0.8);
   height: calc(1.5rem * 0.8);
   font-size: 0.75rem;
-  color: ${(props) => (props.check ? 'black' : 'white')};
   padding: 0.25rem 0.55rem;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0.25rem 0;
+
+  span {
+    color: ${(props) => (props.check ? 'black' : 'white')};
+  }
 `;
 
 const Title = styled.p`
@@ -29,10 +32,14 @@ const Title = styled.p`
   margin-bottom: 0.25rem;
 `;
 
-export function ContentDescription({ title, description, startDate, endDate }: ContentDescriptionProps) {
+export function ContentDescription({
+  title,
+  description,
+  applicationDateStart,
+  applicationDateEnd,
+}: ContentDescriptionProps) {
   const today = new Date();
-  const compareDay = new Date(endDate);
-  console.log(today, compareDay);
+  const compareDay = new Date(applicationDateEnd);
 
   const isSameDate = (date1: Date, date2: Date) => {
     return (
@@ -42,20 +49,22 @@ export function ContentDescription({ title, description, startDate, endDate }: C
     );
   };
   const check = isSameDate(today, compareDay);
+  const gap = compareDay.getTime() - today.getTime();
+  const result = Math.ceil(gap / (1000 * 60 * 60 * 24));
 
   return (
     <FlexContainer direction="column">
       <Dday check={check}>
-        <Span size={0.75} color="white">
-          {check ? '오늘마감' : 'D-2'}
+        <Span size={0.75} weight="bold">
+          {check ? '오늘마감' : `D-${result}`}
         </Span>
       </Dday>
       <Title>{title}</Title>
-      <Span size={0.75} margin="0 0 0.8rem 0">
+      <Span size={0.75} margin="0 0 0.8rem 0" color="#191919">
         {description}
       </Span>
-      <Span size={0.625}>
-        캠페인 신청기간{startDate}~{endDate}
+      <Span size={0.625} color="#767676">
+        캠페인 신청기간{applicationDateStart}~{applicationDateEnd}
       </Span>
     </FlexContainer>
   );

@@ -23,6 +23,7 @@ const StyledLink = styled(Link)<Props>`
   &:visited {
     color: ${(props) => (props.color ? props.color : 'black')};
   }
+  cursor: pointer;
 `;
 
 export function A({ url, color, children }: Props) {
