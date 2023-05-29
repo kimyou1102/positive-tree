@@ -122,8 +122,8 @@ export function RestaurantDetailPage() {
           </Span>
           <Span color="#767676">{sub}</Span>
         </TitleWrap>
-        {/* <PhotoSlide datas={detail?.postImages || nonePhoto} /> */}
-        <PhotoSlide datas={photoTest} />
+        <PhotoSlide datas={detail?.postImages || nonePhoto} />
+        {/* <PhotoSlide datas={photoTest} /> */}
       </div>
       <ContentWrap>
         <div style={{ maxWidth: 'calc(49.5rem * 0.8)', float: 'left' }}>

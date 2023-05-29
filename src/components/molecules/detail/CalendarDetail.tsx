@@ -43,8 +43,6 @@ function CalendarDetail({
   resultDate,
 }: CalendarDetailProps) {
   function getDatesStartToLast(startDate: string, lastDate: string) {
-    // const regex = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
-    // if (!(regex.test(startDate) && regex.test(lastDate))) return 'Not Date Format';
     const result = [];
     const curDate = new Date(startDate);
     while (curDate <= new Date(lastDate)) {
@@ -56,7 +54,6 @@ function CalendarDetail({
 
   const requestPeriod = getDatesStartToLast(requestStartDate, requestEndDate);
   const registerPeriod = getDatesStartToLast(registerStartDate, registerEndDate);
-  //   console.log(requestPeriod, registerPeriod);
 
   const props = { year, requestPeriod, registerPeriod, resultDate };
   return (

@@ -7,7 +7,7 @@ import { PhotoList } from '@molecules';
 import { DetailSide, DetailContents, Footer } from '@organisms';
 import { getPost } from '../../apis/post/get-post-api';
 import photo from '../../assets/images/detail.png';
-import leftArrow from '../../assets/images/leftArrow.png';
+import bottomArrow from '../../assets/images/bottom.png';
 
 const TitleWrap = styled.div`
   display: flex;
@@ -143,11 +143,13 @@ export function ProductDetailPage() {
               </PhotoListWrap>
               <ArrowButton
                 type="left bottom"
-                src={leftArrow}
+                src={bottomArrow}
                 onClick={onClick}
                 bottom="0px"
                 left="50%"
                 transform="translate(-50%, 50%)"
+                width={24 * 0.8}
+                heigth={14 * 0.8}
               />
             </div>
 

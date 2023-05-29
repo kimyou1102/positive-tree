@@ -10,6 +10,8 @@ interface ArrowProps {
   top?: string;
   bottom?: string;
   transform?: string;
+  width?: number;
+  heigth?: number;
 }
 
 const StyledButton = styled.button<{ right: string; left: string; top: string; transform?: string; bottom?: string }>`
@@ -25,6 +27,7 @@ const StyledButton = styled.button<{ right: string; left: string; top: string; t
   background-color: white;
   transform: ${(props) => (props.transform ? props.transform : 'translate(-50%, -50%)')};
   cursor: pointer;
+  box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.15);
 
   &.right {
     right: ${(props) => props.right};
@@ -52,6 +55,8 @@ export function ArrowButton({
   top = '50%',
   transform,
   bottom,
+  width,
+  heigth,
 }: ArrowProps) {
   return (
     <StyledButton
@@ -63,7 +68,12 @@ export function ArrowButton({
       transform={transform}
       bottom={bottom}
     >
-      <img src={src} alt={type === 'right' ? '오른쪽화살표' : '왼쪽화살표'} width={8} height={14} />
+      <img
+        src={src}
+        alt={type === 'right' ? '오른쪽화살표' : '왼쪽화살표'}
+        width={width || '8px'}
+        height={heigth || '14px'}
+      />
     </StyledButton>
   );
 }
