@@ -6,3 +6,4 @@ export * from './Span';
 export * from './ArrowButton';
 export * from './SlideContainer';
 export * from './Ul';
+export * from './PhtoSlideWrap';

@@ -14,13 +14,13 @@ const GlobalStyle = createGlobalStyle`
       text-decoration: none;
     }
 
-    .slick-slide > div {
-      padding: 0px 11px;
-    } 
-
     .slick-arrow:before {
     content: '';
-}
+    }
+
+    .slick-slide > div > div {
+      margin: 0 auto;
+    }
 
     /* .slick-active {
 

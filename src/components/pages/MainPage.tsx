@@ -82,7 +82,7 @@ export function MainPage() {
         <MainSlide />
       </div>
 
-      <div style={{ width: 'calc(100% - ((100% - 60rem)/2))', margin: '0 0 0 auto', paddingLeft: '3rem' }}>
+      <div style={{ width: '60rem', margin: '0 auto', padding: '0 3rem' }}>
         <div style={{ marginTop: '51px', marginBottom: '67.2px' }}>
           <MainItemList />
         </div>

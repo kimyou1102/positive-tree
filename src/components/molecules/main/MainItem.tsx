@@ -6,11 +6,13 @@ interface MainItemProps {
   src: string;
   bgColor: string;
   title: string;
+  imgWidth: string;
+  imgHeight: string;
 }
 
-const Container = styled.button<{ bgColor: string }>`
-  width: calc(11.25rem * 0.8);
-  height: calc(11.25rem * 0.8);
+const Container = styled.button<{ bgColor: string; imgWidth: string; imgHeight: string }>`
+  width: calc(9.625rem * 0.8);
+  height: calc(9.625rem * 0.8);
   border-radius: 24px;
   background-color: ${(props) => props.bgColor};
   border: none;
@@ -21,15 +23,15 @@ const Container = styled.button<{ bgColor: string }>`
   cursor: pointer;
 
   img {
-    width: calc(6.25rem * 0.8);
-    height: calc(6.25rem * 0.8);
+    width: ${(props) => `calc(${props.imgWidth} * 0.8 )`};
+    height: ${(props) => `calc(${props.imgHeight} * 0.8 )`};
   }
 `;
 
-export function MainItem({ src, bgColor, title }: MainItemProps) {
+export function MainItem({ src, bgColor, title, imgWidth, imgHeight }: MainItemProps) {
   return (
-    <FlexContainer direction="column" width={11.25} align="center">
-      <Container bgColor={bgColor}>
+    <FlexContainer direction="column" width={9.625} align="center">
+      <Container bgColor={bgColor} imgWidth={imgWidth} imgHeight={imgHeight}>
         <img src={src} alt={`${title}아이콘`} />
       </Container>
       <Span size={0.875} margin="0.4rem 0 0 0">

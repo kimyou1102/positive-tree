@@ -115,7 +115,7 @@ export function RestaurantDetailPage() {
 
   return (
     <>
-      <div style={{ width: 'calc(100% - ((100% - 60rem)/2))', margin: '4rem 0 0 auto', paddingLeft: '3rem' }}>
+      <div style={{ width: '60rem', margin: '0 auto' }}>
         <TitleWrap>
           <Span weight="bold" size={1.625} margin="0 0 0.5rem 0">
             {title}

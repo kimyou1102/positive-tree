@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { ArrowButton, SlideContainer, Span, A, FlexContainer } from '@atoms';
+import { ArrowButton, SlideContainer, Span, A, FlexContainer, PhotoSlideWrap } from '@atoms';
 import { CampaignItem } from '@molecules';
 import photo from '../../assets/images/campaign.png';
 import photo2 from '../../assets/images/campaign2.png';
@@ -61,22 +61,22 @@ export function HighlyCampaign({ title }: HighlyCampaignProps) {
           <A url="#">전체보기</A>
         </Span>
       </FlexContainer>
-      <div style={{ position: 'relative' }}>
+      <PhotoSlideWrap>
         <ArrowButton type="left top" src={leftArrow} onClick={onLeftClick} top="calc( 9.6rem  / 2)" />
         <ArrowButton
-          type="left top"
+          type="right top"
           src={rightArrow}
           onClick={onRightClick}
           top="calc( 9.6rem / 2)"
-          transform="translate(-50%, -50%)"
-          left="60rem"
+          right="0px"
+          transform="translate(50%, -50%)"
         />
         <SlideContainer ref={scrollRef}>
           {test.map((item) => (
             <CampaignItem key={item.id} {...item} />
           ))}
         </SlideContainer>
-      </div>
+      </PhotoSlideWrap>
     </>
   );
 }

@@ -8,7 +8,9 @@ import logo from '../../assets/images/header_logo.png';
 const Container = styled.header`
   display: flex;
   height: calc(80px * 0.8);
-  justify-content: space-around;
+  width: 60rem;
+  justify-content: space-between;
+  margin: 0 auto;
 `;
 
 const StyleLogo = styled.img`
