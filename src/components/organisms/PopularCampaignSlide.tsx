@@ -2,22 +2,12 @@ import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { ContentItem } from '@molecules';
 import { ArrowButton, SlideContainer, Span, A, FlexContainer, PhotoSlideWrap } from '@atoms';
+import { ListType } from 'src/models/posts';
 import leftArrow from '../../assets/images/leftArrow.png';
 import rightArrow from '../../assets/images/rightArrow.png';
 
-type DataType = {
-  id: number;
-  src: string;
-  rank: number;
-  title: string;
-  applicationDateStart: string;
-  applicationDateEnd: string;
-  category: string;
-  description: string;
-};
-
 interface PopularCampaignSlideProps {
-  datas: DataType[];
+  datas: ListType[];
   title: string;
   scroll: HTMLDivElement | undefined;
   setScroll: any;
@@ -87,15 +77,16 @@ export function PopularCampaignSlide({ datas, title, scroll, setScroll }: Popula
           {datas.map((data) => (
             <ContentItem
               id={data.id}
+              key={data.id}
               category={data.category}
               type="main"
-              src={data.src}
-              key={data.id}
-              rank={data.rank}
+              src={data.postImages[0].image}
+              rank={data.id}
+              // rank={data.rank}
               title={data.title}
               description={data.description}
-              applicationDateStart={data.applicationDateStart}
-              applicationDateEnd={data.applicationDateEnd}
+              applicationDateStart={data.schedule.applicationDateStart}
+              applicationDateEnd={data.schedule.applicationDateEnd}
             />
           ))}
         </SlideContainer>
