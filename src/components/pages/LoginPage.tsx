@@ -7,12 +7,91 @@ import { AccountButton } from '@atoms/account/AccuontButton';
 import { AccountFlexDiv } from '@atoms/account/AccountFlexDiv';
 import { AccountInput } from '@atoms/account/AccountInput';
 import { Header } from '@organisms';
-import React from 'react';
+import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { FindPasswordSpan } from '@atoms/account/FindPasswordSpan';
 import { useNavigate } from 'react-router-dom';
+import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
+import { createLogin } from '../../apis/user/create-logtin-api';
 
-export default function LoginPage() {
+function GoogleLoginBtn() {
+  // const googleLoginOnSuccess = useGoogleLoginSuccessHandler();
+
+  const googleLoginClick = useGoogleLogin({
+    onSuccess: async (response) => {
+      console.log(response);
+      // await googleLoginOnSuccess(response.access_token);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  return (
+    <AccountButton theme="GOOGLE" onClick={() => googleLoginClick()}>
+      구글 로그인 하기
+    </AccountButton>
+  );
+}
+
+export function LoginPage() {
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['access_token']);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  function validation() {
+    const regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    if (!regexEmail.test(email)) {
+      alert('이메일이 올바른 형식이 아닙니다.');
+      return false;
+    }
+
+    return true;
+  }
+
+  const loginApi = async () => {
+    if (!(await validation())) {
+      return;
+    }
+
+    console.log({ email, password });
+
+    await createLogin({ email, password })
+      .then((res) => {
+        console.log(res);
+        const cookie = res.headers.authorization.replace('Bearer ', '');
+        setCookie('access_token', cookie);
+        console.log(cookie);
+        navigate('/');
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const login = async () => {
+    await loginApi();
+  };
+
+  // const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
+  const REST_API_KEY = process.env.REACT_APP_KAKAO_AUTH_API_KEY;
+  console.log(REST_API_KEY);
+  // const REST_API_KEY = '22042b7f4fca6a494665a5b354ec6b82';
+  const REDIRECT_URI = 'http://localhost:3000/kakao_login';
+  // const REDIRECT_URI = 'http://localhost:3000/oauth';
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const clientId = 'b10e517980a478ca257a11c89320a8a4';
+  const googleOauthClientId = '';
+
+  const kakaoLoginClick = () => {
+    window.open(
+      `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${REDIRECT_URI}&response_type=code`,
+      '_self',
+    );
+    // window.location.href = KAKAO_AUTH_URL;
+    // const code = new URL(window.location.href).searchParams.get('code');
+    // console.log(code);
+  };
 
   return (
     <div>
@@ -23,19 +102,32 @@ export default function LoginPage() {
           </H3>
 
           <AccountBox>
-            <AccountInput placeholder="이메일" />
-            <AccountInput placeholder="비밀번호" type="password" noTopBorder />
+            <AccountInput placeholder="이메일" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <AccountInput
+              placeholder="비밀번호"
+              type="password"
+              noTopBorder
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </AccountBox>
 
           <AccountFlexDiv justify="flex-end">
             <FindPasswordSpan>비밀번호를 잊어버렸나요?</FindPasswordSpan>
           </AccountFlexDiv>
 
-          <AccountButton theme="BLACK">로그인 하기</AccountButton>
+          <AccountButton theme="BLACK" onClick={login}>
+            로그인 하기
+          </AccountButton>
 
-          <AccountButton theme="KAKAO">카카오톡 로그인 하기</AccountButton>
+          <AccountButton theme="KAKAO" onClick={kakaoLoginClick}>
+            카카오톡 로그인 하기
+          </AccountButton>
 
+          {/* <GoogleOAuthProvider clientId={googleOauthClientId}>
+            <GoogleLoginBtn /> */}
           <AccountButton theme="GOOGLE">구글 로그인 하기</AccountButton>
+          {/* </GoogleOAuthProvider> */}
 
           <AccountDivider />
 

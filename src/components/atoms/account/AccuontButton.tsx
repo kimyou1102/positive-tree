@@ -13,6 +13,11 @@ export const AccountButton = styled.button<AcouuntButtonProps>`
   font-size: 1rem;
   cursor: pointer;
 
+  &.disabled {
+    background-color: #787878;
+    cursor: default;
+  }
+
   ${(props) =>
     props.theme === 'BLACK' &&
     css`
