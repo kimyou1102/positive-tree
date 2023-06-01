@@ -10,6 +10,7 @@ import { modalState } from '../../store/detail/modal';
 import { getPost } from '../../apis/post/get-post-api';
 import photo from '../../assets/images/detail.png';
 import bottomArrow from '../../assets/images/bottom.png';
+import topArrow from '../../assets/images/top.png';
 
 const TitleWrap = styled.div`
   display: flex;
@@ -160,7 +161,7 @@ export function ProductDetailPage() {
               </PhotoListWrap>
               <ArrowButton
                 type="left bottom"
-                src={bottomArrow}
+                src={close ? bottomArrow : topArrow}
                 onClick={onClick}
                 bottom="0px"
                 left="50%"
