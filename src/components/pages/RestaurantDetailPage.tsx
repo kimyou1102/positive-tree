@@ -58,11 +58,11 @@ export function RestaurantDetailPage() {
 
   // const title = '[전라] 유성횟집';
   // const sub = '석양이 잘 보이는 데다가 신선하기까지 한 가성비 횟집!';
-  const requestStartDate = '2023-05-07';
-  const requestEndDate = '2023-05-10';
-  const registerStartDate = '2023-05-15';
-  const registerEndDate = '2023-05-20';
-  const resultDate = '2023-05-21';
+  // const requestStartDate = '2023-05-07';
+  // const requestEndDate = '2023-05-10';
+  // const registerStartDate = '2023-05-15';
+  // const registerEndDate = '2023-05-20';
+  // const resultDate = '2023-05-21';
 
   // const address = '전남 목포시 북항로 190';
   // const provisionDetails = '15만원 식사권 (2인 기준)';
@@ -79,11 +79,11 @@ export function RestaurantDetailPage() {
 
   const title = detail?.title || '';
   const sub = detail?.description || '';
-  // const requestStartDate = detail?.schedule.applicationDateStart || '';
-  // const requestEndDate = detail?.schedule.applicationDateEnd || '';
-  // const registerStartDate = detail?.schedule.contentsDateStart || '';
-  // const registerEndDate = detail?.schedule.contentsDateEnd || '';
-  // const resultDate = detail?.schedule.resultDate || '';
+  const requestStartDate = detail?.schedule.applicationDateStart || '';
+  const requestEndDate = detail?.schedule.applicationDateEnd || '';
+  const registerStartDate = detail?.schedule.contentsDateStart || '';
+  const registerEndDate = detail?.schedule.contentsDateEnd || '';
+  const resultDate = detail?.schedule.resultDate || '';
 
   const address = detail?.address || '';
   const provisionDetails = detail?.provision || '';
