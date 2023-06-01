@@ -42,4 +42,8 @@ export const FlexContainer = styled.div<Props>`
   &.full {
     width: 100%;
   }
+
+  &.none {
+    display: none;
+  }
 `;

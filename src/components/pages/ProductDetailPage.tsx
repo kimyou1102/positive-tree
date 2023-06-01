@@ -2,9 +2,11 @@ import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { ListType } from 'src/models/posts';
-import { Span, ArrowButton } from '@atoms';
-import { PhotoList } from '@molecules';
+import { Span, ArrowButton, ModalWrap } from '@atoms';
+import { PhotoList, Modal } from '@molecules';
 import { DetailSide, DetailContents, Footer } from '@organisms';
+import { useRecoilState } from 'recoil';
+import { modalState } from '../../store/detail/modal';
 import { getPost } from '../../apis/post/get-post-api';
 import photo from '../../assets/images/detail.png';
 import bottomArrow from '../../assets/images/bottom.png';
@@ -34,6 +36,8 @@ const PhotoListWrap = styled.div`
 export function ProductDetailPage() {
   const [detail, setDetail] = useState<ListType>();
   const [close, setClose] = useState<boolean>(true);
+  const [modal, setModal] = useRecoilState(modalState);
+  const [top, setTop] = useState(0);
 
   const { id } = useParams();
   console.log(id);
@@ -53,17 +57,29 @@ export function ProductDetailPage() {
     setClose((prev) => !prev);
   };
 
-  const photoTest = [
-    { id: 1, src: photo },
-    { id: 2, src: photo },
-    { id: 3, src: photo },
-    { id: 4, src: photo },
-    { id: 5, src: photo },
-    { id: 6, src: photo },
-    { id: 7, src: photo },
-    { id: 8, src: photo },
-    { id: 9, src: photo },
-  ];
+  console.log(top);
+
+  const onOutsideModalClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    console.log(e.target);
+    const target = e.target as HTMLElement;
+    if (!target.closest('#modal')) {
+      setModal(false);
+      document.querySelector('body')?.classList.remove('none');
+    }
+  };
+
+  // const photoTest = [
+  //   { image: photo },
+  //   { image: photo },
+  //   { image: photo },
+  //   { image: photo },
+  //   { image: photo },
+  //   { image: photo },
+  //   { image: photo },
+  //   { image: photo },
+  //   { image: photo },
+  // ];
+  const photoTest = [{ image: photo }, { image: photo }];
 
   // const title = '[전라] 유성횟집';
   // const sub = '석양이 잘 보이는 데다가 신선하기까지 한 가성비 횟집!';
@@ -139,7 +155,8 @@ export function ProductDetailPage() {
           <div style={{ width: 'calc(49.5rem * 0.8)', float: 'left' }}>
             <div style={{ position: 'relative' }}>
               <PhotoListWrap className={close ? 'close' : ''}>
-                <PhotoList datas={detail?.postImages || nonePhoto} />
+                <PhotoList datas={photoTest} />
+                {/* <PhotoList datas={detail?.postImages || nonePhoto} /> */}
               </PhotoListWrap>
               <ArrowButton
                 type="left bottom"
@@ -159,11 +176,17 @@ export function ProductDetailPage() {
             </div>
           </div>
           <div>
-            <DetailSide {...slideProps} />
+            <DetailSide {...slideProps} setTop={setTop} />
           </div>
         </ContentWrap>
       </div>
-
+      <ModalWrap
+        className={!modal ? 'none' : ''}
+        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => onOutsideModalClick(e)}
+        top={top}
+      >
+        <Modal modal={modal} />
+      </ModalWrap>
       <Footer />
     </>
   );

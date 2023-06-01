@@ -5,6 +5,8 @@ import { ListType } from 'src/models/posts';
 import { Span } from '@atoms';
 import { PhotoSlide } from '@molecules';
 import { DetailSide, DetailContents, Footer } from '@organisms';
+import { useRecoilState } from 'recoil';
+import { modalState } from '../../store/detail/modal';
 import { getPost } from '../../apis/post/get-post-api';
 import photo from '../../assets/images/detail.png';
 
@@ -26,6 +28,9 @@ const ContentWrap = styled.div`
 export function RestaurantDetailPage() {
   const [detail, setDetail] = useState<ListType>();
   const { id } = useParams();
+  const [modal, setModal] = useRecoilState(modalState);
+  const [top, setTop] = useState(0);
+
   console.log(id);
 
   const api = useCallback(async () => {
@@ -130,7 +135,7 @@ export function RestaurantDetailPage() {
           <DetailContents {...contentsProps} />
         </div>
         <div>
-          <DetailSide {...slideProps} />
+          <DetailSide {...slideProps} setTop={setTop} />
         </div>
       </ContentWrap>
       <Footer />

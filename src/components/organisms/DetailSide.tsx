@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Span } from '@atoms';
 import { Calendar } from '@molecules';
+import { useRecoilState } from 'recoil';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { modalState } from '../../store/detail/modal';
+import { createCampaign } from '../../apis/campaign/create-campaign-api';
 
 interface DetailSideProps {
   requestStartDate: string;
@@ -9,6 +14,7 @@ interface DetailSideProps {
   registerStartDate: string;
   registerEndDate: string;
   resultDate: string;
+  setTop: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Container = styled.div`
@@ -68,6 +74,7 @@ export function DetailSide({
   registerStartDate,
   registerEndDate,
   resultDate,
+  setTop,
 }: DetailSideProps) {
   const props = {
     requestStartDate,
@@ -76,6 +83,31 @@ export function DetailSide({
     registerEndDate,
     resultDate,
   };
+  const [modal, setModal] = useRecoilState(modalState);
+  const [cookies, setCookie] = useCookies(['access_token']);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const createCampaignApi = async () => {
+    await createCampaign(parseInt(id!, 10), cookies.access_token)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const onClick = () => {
+    if (cookies.access_token) {
+      createCampaignApi();
+      setTop(window.scrollY);
+      setModal(true);
+      document.querySelector('body')?.classList.add('none');
+    } else {
+      alert('로그인을 해주세요.');
+      navigate('/login');
+    }
+  };
+
   return (
     <Container>
       <CalendarSectionWrap>
@@ -102,7 +134,7 @@ export function DetailSide({
         </InfoWrap>
         <Calendar {...props} />
       </CalendarSectionWrap>
-      <Button>캠페인 신청하기</Button>
+      <Button onClick={onClick}>캠페인 신청하기</Button>
     </Container>
   );
 }

@@ -10,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'PretendardRegular'
     }
 
+    .none {
+      overflow-y: hidden;
+    }
+
     a {
       text-decoration: none;
     }
