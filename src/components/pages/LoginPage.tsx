@@ -56,14 +56,10 @@ export function LoginPage() {
       return;
     }
 
-    console.log({ email, password });
-
     await createLogin({ email, password })
       .then((res) => {
-        console.log(res);
         const cookie = res.headers.authorization.replace('Bearer ', '');
         setCookie('access_token', cookie);
-        console.log(cookie);
         navigate('/');
       })
       .catch((err) => console.log(err));
@@ -73,24 +69,14 @@ export function LoginPage() {
     await loginApi();
   };
 
-  // const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
   const REST_API_KEY = process.env.REACT_APP_KAKAO_AUTH_API_KEY;
-  console.log(REST_API_KEY);
-  // const REST_API_KEY = '22042b7f4fca6a494665a5b354ec6b82';
   const REDIRECT_URI = 'http://localhost:3000/kakao_login';
-  // const REDIRECT_URI = 'http://localhost:3000/oauth';
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-  const clientId = 'b10e517980a478ca257a11c89320a8a4';
-  const googleOauthClientId = '';
 
   const kakaoLoginClick = () => {
     window.open(
-      `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${REDIRECT_URI}&response_type=code`,
+      `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`,
       '_self',
     );
-    // window.location.href = KAKAO_AUTH_URL;
-    // const code = new URL(window.location.href).searchParams.get('code');
-    // console.log(code);
   };
 
   return (

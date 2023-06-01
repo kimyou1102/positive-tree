@@ -1,29 +1,27 @@
 import { H3, Span } from '@atoms';
-import { AccountDivider } from '@atoms/account/AccountDivider';
 import { AccountRadioBox } from '@atoms/account/AccountRadioBoxBox';
 import { AccountRadioButton } from '@atoms/account/AccountRadioButton';
 import { AccountRadioContainer } from '@atoms/account/AccountRadioContainer';
 import { LoginBox } from '@atoms/account/LoginBox';
-import { LoginContainer } from '@atoms/account/LoginContainer';
 import { SignupContainer } from '@atoms/account/SignupContainer';
 import { AccountBox } from '@atoms/account/AccountBox';
 import { AccountButton } from '@atoms/account/AccuontButton';
 import { AccountCheckBox } from '@atoms/account/AccountCheckBox';
 import { AccountCheckboxContainer } from '@atoms/account/AccountCheckBoxContainer';
-import { AccountFlexDiv } from '@atoms/account/AccountFlexDiv';
 import { AccountInput } from '@atoms/account/AccountInput';
-import { Header } from '@organisms';
 import React, { ChangeEvent, useRef, useState, useEffect } from 'react';
 import { useRecoilState, useRecoilCallback } from 'recoil';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { userState } from '../../store/user/user';
-import { createSingup } from '../../apis/user/create-singup-api';
+import { kakaoUserState } from '../../store/user/user';
+import { patchUser } from '../../apis/user/patch-user.api';
 
-export function SignupPage() {
+export function KakaoSignupPage() {
   const dateRef = useRef<HTMLInputElement>(null);
+  const location = useLocation();
+  const [cookies, setCookie] = useCookies(['access_token']);
 
-  const [userInfo, setUserInfo] = useRecoilState(userState);
+  const [userInfo, setUserInfo] = useRecoilState(kakaoUserState);
   const [active, setActive] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -43,47 +41,34 @@ export function SignupPage() {
   }, [terms]);
 
   function validation() {
-    if (userInfo.password !== userInfo.confirmPassword) {
-      alert('비밀번호가 일치하지 않습니다.');
-      return false;
-    }
-
-    const regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-    if (!regexEmail.test(userInfo.email)) {
-      alert('이메일이 올바른 형식이 아닙니다.');
+    // 전화번호 검증
+    const regex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+    if (!regex.test(userInfo.phone)) {
+      alert('본인 휴대폰의 전화번호 형식이 올바르지 않습니다.');
       return false;
     }
 
     return true;
   }
 
-  const signupApi = useRecoilCallback(({ snapshot }) => async () => {
-    console.log(snapshot);
-    const updateUserInfo = await snapshot.getPromise(userState);
-    console.log(updateUserInfo);
+  const patchApi = useRecoilCallback(({ snapshot }) => async () => {
+    const updateUserInfo = await snapshot.getPromise(kakaoUserState);
+
     if (!(await validation())) {
       return;
     }
 
-    await createSingup(updateUserInfo)
+    await patchUser(updateUserInfo, location.state.token)
       .then((res) => {
-        console.log(res);
-        // navigate('/')
+        setCookie('access_token', location.state.token);
+        navigate('/');
       })
       .catch((err) => console.log(err));
-
-    console.log('통과');
   });
 
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log(userInfo);
-    await signupApi();
-
-    // await createSingup(userInfo).then((res) => console.log(res));
-    console.log('서브밋');
+    await patchApi();
   };
 
   function handleDateClick() {
@@ -96,7 +81,7 @@ export function SignupPage() {
         ...prevState,
         [state]: Number(e.target.value),
       }));
-    } else if (state === 'isMarketingAgreed') {
+    } else if (state === 'marketingStatus') {
       setUserInfo((prevState) => ({
         ...prevState,
         [state]: e.target.checked,
@@ -110,14 +95,11 @@ export function SignupPage() {
   };
 
   const handleCheck = (e: ChangeEvent<HTMLInputElement>, state: string) => {
-    console.log(state, e.target.checked);
     setTerms((prevState) => ({
       ...prevState,
       [state]: e.target.checked,
     }));
   };
-
-  console.log(userInfo);
 
   return (
     <div>
@@ -129,26 +111,11 @@ export function SignupPage() {
           <form onSubmit={submit}>
             <AccountBox>
               <AccountInput
-                placeholder="이메일*"
-                signup
-                required
-                type="email"
-                value={userInfo.email}
-                onChange={(e) => handleInput(e, 'email')}
-              />
-              <AccountInput
-                placeholder="닉네임*"
+                placeholder="닉네임"
                 signup
                 required
                 value={userInfo.nickname}
                 onChange={(e) => handleInput(e, 'nickname')}
-              />
-              <AccountInput
-                placeholder="이름*"
-                signup
-                required
-                value={userInfo.name}
-                onChange={(e) => handleInput(e, 'name')}
               />
               <AccountInput
                 placeholder="출생년도"
@@ -161,7 +128,7 @@ export function SignupPage() {
               />
 
               <Span font="PretendardBold" color="#767676">
-                성별*
+                성별
               </Span>
 
               <AccountRadioContainer>
@@ -194,53 +161,42 @@ export function SignupPage() {
               </AccountRadioContainer>
 
               <AccountInput
-                placeholder="카카오톡 아이디*"
+                placeholder="휴대폰 번호(010-1234-1234)"
+                signup
+                required
+                value={userInfo.phone}
+                onChange={(e) => handleInput(e, 'phone')}
+              />
+              <AccountInput
+                placeholder="카카오톡 아이디"
                 signup
                 required
                 value={userInfo.kakaoId}
                 onChange={(e) => handleInput(e, 'kakaoId')}
               />
               <AccountInput
-                placeholder="비밀번호*"
-                signup
-                required
-                type="password"
-                value={userInfo.password}
-                onChange={(e) => handleInput(e, 'password')}
-              />
-              <AccountInput
-                placeholder="비밀번호 확인*"
-                signup
-                required
-                type="password"
-                value={userInfo.confirmPassword}
-                onChange={(e) => handleInput(e, 'confirmPassword')}
-              />
-              <AccountInput
-                placeholder="블로그 주소*"
+                placeholder="블로그 주소(필수)"
                 signup
                 required
                 value={userInfo.blog}
                 onChange={(e) => handleInput(e, 'blog')}
               />
               <AccountInput
-                placeholder="인스타그램 주소*"
+                placeholder="인스타그램 주소(선택)"
                 signup
-                required
                 value={userInfo.instagram}
                 onChange={(e) => handleInput(e, 'instagram')}
               />
               <AccountInput
-                placeholder="유튜브 주소*"
+                placeholder="유튜브 주소(선택)"
                 signup
-                required
                 value={userInfo.youtube}
                 onChange={(e) => handleInput(e, 'youtube')}
               />
             </AccountBox>
 
             <AccountCheckboxContainer>
-              <AccountCheckBox type="checkbox" id="agree" onChange={(e) => handleInput(e, 'isMarketingAgreed')} />
+              <AccountCheckBox type="checkbox" id="agree" onChange={(e) => handleInput(e, 'marketingStatus')} />
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label id="agree">
                 캠페인 모집 및 추천, 설문조사, 이벤트 정보등의 마케팅 수신
@@ -294,5 +250,3 @@ export function SignupPage() {
     </div>
   );
 }
-
-export default SignupPage;

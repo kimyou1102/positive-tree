@@ -10,6 +10,7 @@ import {
   LoginPage,
   SignupPage,
   KakaoAuthHandler,
+  KakaoSignupPage,
 } from '@pages';
 import { Header } from '@organisms';
 
@@ -26,7 +27,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/kakao_login" element={<KakaoAuthHandler />} />
-        {/* <Route path="/oauth" element={<KakaoAuthHandler />} /> */}
+        <Route path="/kakao_signup" element={<KakaoSignupPage />} />
       </Route>
     </Routes>
   );
