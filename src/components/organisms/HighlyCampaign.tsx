@@ -78,7 +78,8 @@ export function HighlyCampaign({ datas, title }: HighlyCampaignProps) {
           {datas.map((item) => (
             <CampaignItem
               key={item.id}
-              src={item.postImages[0].image}
+              // src={item.postImages[0].image}
+              src={item.postImages.length === 0 ? '' : item.postImages[0].image}
               title={item.title}
               description={item.description}
             />

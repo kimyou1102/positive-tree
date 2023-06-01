@@ -23,8 +23,9 @@ const Img = styled.img`
 export function PhotoList({ datas }: PhotoListProps) {
   return (
     <Container>
-      {datas.map((data) => (
-        <Img key={data.image} alt="사진" src={data.image} />
+      {datas.map((data, i) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <Img key={`${data.image}-${i}`} alt="사진" src={data.image} />
       ))}
     </Container>
   );

@@ -80,7 +80,8 @@ export function PopularCampaignSlide({ datas, title, scroll, setScroll }: Popula
               key={data.id}
               category={data.category}
               type="main"
-              src={data.postImages[0].image}
+              // src={data.postImages[0].image}
+              src={data.postImages.length === 0 ? '' : data.postImages[0].image}
               rank={data.id}
               // rank={data.rank}
               title={data.title}
