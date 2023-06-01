@@ -70,7 +70,7 @@ export function LoginPage() {
   };
 
   const REST_API_KEY = process.env.REACT_APP_KAKAO_AUTH_API_KEY;
-  const REDIRECT_URI = 'http://localhost:3000/kakao_login';
+  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
 
   const kakaoLoginClick = () => {
     window.open(

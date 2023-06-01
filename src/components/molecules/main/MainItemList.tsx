@@ -25,9 +25,15 @@ export function MainItemList() {
       <A url="/restaurant">
         <MainItem imgWidth="101px" imgHeight="80px" src={icon2} bgColor="#FAF0C5" title="맛집" />
       </A>
-      <MainItem imgWidth="71px" imgHeight="77px" src={icon3} bgColor="#D6E6FF" title="여행" />
-      <MainItem imgWidth="78px" imgHeight="81px" src={icon4} bgColor="#D7F5EE" title="뷰티" />
-      <MainItem imgWidth="84px" imgHeight="80px" src={icon5} bgColor="#DAF1FB" title="문화" />
+      <A url="/restaurant">
+        <MainItem imgWidth="71px" imgHeight="77px" src={icon3} bgColor="#D6E6FF" title="여행" />
+      </A>
+      <A url="/restaurant">
+        <MainItem imgWidth="78px" imgHeight="81px" src={icon4} bgColor="#D7F5EE" title="뷰티" />
+      </A>
+      <A url="/restaurant">
+        <MainItem imgWidth="84px" imgHeight="80px" src={icon5} bgColor="#DAF1FB" title="문화" />
+      </A>
       <A url="/product">
         <MainItem imgWidth="81px" imgHeight="80px" src={icon6} bgColor="#DDF5D4" title="제품" />
       </A>

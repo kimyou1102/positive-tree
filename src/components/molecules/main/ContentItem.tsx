@@ -69,7 +69,7 @@ export function ContentItem({
   const url = category === '맛집' ? 'restaurant' : 'product';
   return (
     <Container type={type}>
-      <A url={`${id}`}>
+      <A url={`/restaurant/${id}`}>
         <ImgWrap>
           <img alt="캠페인사진" src={src} />
         </ImgWrap>
