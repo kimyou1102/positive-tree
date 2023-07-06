@@ -4,34 +4,34 @@ import { Span, FlexContainer } from '@atoms';
 
 interface MainItemProps {
   src: string;
-  bgColor: string;
   title: string;
-  imgWidth: string;
-  imgHeight: string;
+  imgWidth: number;
+  imgHeight: number;
 }
 
-const Container = styled.button<{ bgColor: string; imgWidth: string; imgHeight: string }>`
-  width: calc(9.625rem * 0.8);
-  height: calc(9.625rem * 0.8);
+const Container = styled.button<{ imgWidth: number; imgHeight: number }>`
+  width: calc(100px * 0.8);
+  height: calc(100px * 0.8);
   border-radius: 24px;
-  background-color: ${(props) => props.bgColor};
+  background-color: white;
   border: none;
   padding: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.16);
 
   img {
-    width: ${(props) => `calc(${props.imgWidth} * 0.8 )`};
-    height: ${(props) => `calc(${props.imgHeight} * 0.8 )`};
+    width: ${(props) => `calc(${props.imgWidth}px * 0.8 )`};
+    height: ${(props) => `calc(${props.imgHeight}px * 0.8 )`};
   }
 `;
 
-export function MainItem({ src, bgColor, title, imgWidth, imgHeight }: MainItemProps) {
+export function MainItem({ src, title, imgWidth, imgHeight }: MainItemProps) {
   return (
-    <FlexContainer direction="column" width={9.625} align="center">
-      <Container bgColor={bgColor} imgWidth={imgWidth} imgHeight={imgHeight}>
+    <FlexContainer direction="column" align="center">
+      <Container imgWidth={imgWidth} imgHeight={imgHeight}>
         <img src={src} alt={`${title}아이콘`} />
       </Container>
       <Span size={0.875} margin="0.4rem 0 0 0">

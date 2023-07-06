@@ -10,28 +10,32 @@ import icon4 from '../../../assets/images/icon4.png';
 import icon5 from '../../../assets/images/icon5.png';
 import icon6 from '../../../assets/images/icon6.png';
 import icon7 from '../../../assets/images/icon7.png';
+import icon8 from '../../../assets/images/icon8.png';
+import icon9 from '../../../assets/images/icon9.png';
+import icon10 from '../../../assets/images/icon10.png';
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 12px;
-  width: 60rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export function MainItemList() {
   return (
     <Container>
-      <MainItem imgWidth="81px" imgHeight="80px" src={icon1} bgColor="#EEF6B8" title="이용가이드" />
+      <MainItem imgWidth={52} imgHeight={49} src={icon1} title="맛집" />
       <A url="/restaurant">
-        <MainItem imgWidth="101px" imgHeight="80px" src={icon2} bgColor="#FAF0C5" title="맛집" />
+        <MainItem imgWidth={53} imgHeight={46} src={icon2} title="뷰티" />
       </A>
-      <MainItem imgWidth="71px" imgHeight="77px" src={icon3} bgColor="#D6E6FF" title="여행" />
-      <MainItem imgWidth="78px" imgHeight="81px" src={icon4} bgColor="#D7F5EE" title="뷰티" />
-      <MainItem imgWidth="84px" imgHeight="80px" src={icon5} bgColor="#DAF1FB" title="문화" />
+      <MainItem imgWidth={54} imgHeight={30} src={icon3} title="배송" />
+      <MainItem imgWidth={52} imgHeight={49} src={icon4} title="문화" />
+      <MainItem imgWidth={52} imgHeight={36} src={icon5} title="배달" />
       <A url="/product">
-        <MainItem imgWidth="81px" imgHeight="80px" src={icon6} bgColor="#DDF5D4" title="제품" />
+        <MainItem imgWidth={55} imgHeight={49} src={icon6} title="포인트" />
       </A>
-      <MainItem imgWidth="79px" imgHeight="100px" src={icon7} bgColor="#EEF6B8" title="광고 문의" />
+      <MainItem imgWidth={100} imgHeight={100} src={icon7} title="기자단" />
+      <MainItem imgWidth={100} imgHeight={100} src={icon8} title="기타체험" />
+      <MainItem imgWidth={49} imgHeight={51} src={icon9} title="광고문의" />
+      <MainItem imgWidth={100} imgHeight={100} src={icon10} title="이용가이드" />
     </Container>
   );
 }
