@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { ArrowButton, SlideContainer, Span, A, FlexContainer } from '@atoms';
+import { ArrowButton, SlideContainer, Span, A, FlexContainer, PhotoSlideWrap } from '@atoms';
 import { CampaignItem } from '@molecules';
+import { ListType } from 'src/models/posts';
 import photo from '../../assets/images/campaign.png';
 import photo2 from '../../assets/images/campaign2.png';
 import 'slick-carousel/slick/slick.css';
@@ -10,6 +11,7 @@ import leftArrow from '../../assets/images/leftArrow.png';
 import rightArrow from '../../assets/images/rightArrow.png';
 
 interface HighlyCampaignProps {
+  datas: ListType[];
   title: string;
 }
 
@@ -19,7 +21,8 @@ const Text = styled.p`
   margin-bottom: 1rem;
 `;
 
-export function HighlyCampaign({ title }: HighlyCampaignProps) {
+export function HighlyCampaign({ datas, title }: HighlyCampaignProps) {
+  console.log(datas);
   const [title1, title2] = title.split(',');
   const test = [
     { id: 1, src: photo, title: '가족과는 좋은 것만 누려요', description: '긍정나무가 제안하는 맛집 캠페인' },
@@ -61,22 +64,28 @@ export function HighlyCampaign({ title }: HighlyCampaignProps) {
           <A url="#">전체보기</A>
         </Span>
       </FlexContainer>
-      <div style={{ position: 'relative' }}>
+      <PhotoSlideWrap>
         <ArrowButton type="left top" src={leftArrow} onClick={onLeftClick} top="calc( 9.6rem  / 2)" />
         <ArrowButton
-          type="left top"
+          type="right top"
           src={rightArrow}
           onClick={onRightClick}
           top="calc( 9.6rem / 2)"
-          transform="translate(-50%, -50%)"
-          left="60rem"
+          right="0px"
+          transform="translate(50%, -50%)"
         />
         <SlideContainer ref={scrollRef}>
-          {test.map((item) => (
-            <CampaignItem key={item.id} {...item} />
+          {datas.map((item) => (
+            <CampaignItem
+              key={item.id}
+              // src={item.postImages[0].image}
+              src={item.postImages.length === 0 ? '' : item.postImages[0].image}
+              title={item.title}
+              description={item.description}
+            />
           ))}
         </SlideContainer>
-      </div>
+      </PhotoSlideWrap>
     </>
   );
 }

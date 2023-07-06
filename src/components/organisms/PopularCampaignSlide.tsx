@@ -1,29 +1,13 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { ContentItem } from '@molecules';
-import { ArrowButton, SlideContainer, Span, A, FlexContainer } from '@atoms';
-import { useRecoilState } from 'recoil';
-import Slider from 'react-slick';
-import { PopularScrollState } from '../../recoil/main/scroll';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import { ArrowButton, SlideContainer, Span, A, FlexContainer, PhotoSlideWrap } from '@atoms';
+import { ListType } from 'src/models/posts';
 import leftArrow from '../../assets/images/leftArrow.png';
 import rightArrow from '../../assets/images/rightArrow.png';
-import food1 from '../../assets/images/food1.png';
-
-type DataType = {
-  id: number;
-  src: string;
-  rank: number;
-  title: string;
-  applicationDateStart: string;
-  applicationDateEnd: string;
-  category: string;
-  description: string;
-};
 
 interface PopularCampaignSlideProps {
-  datas: DataType[];
+  datas: ListType[];
   title: string;
   scroll: HTMLDivElement | undefined;
   setScroll: any;
@@ -36,11 +20,9 @@ const Text = styled.p`
 `;
 
 export function PopularCampaignSlide({ datas, title, scroll, setScroll }: PopularCampaignSlideProps) {
-  //   const [scroll, setScroll] = useRecoilState<HTMLDivElement | undefined>(PopularScrollState);
-
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  console.log(scrollRef);
+  // console.log(scrollRef);
 
   useEffect(() => {
     if (scrollRef && scrollRef.current) {
@@ -81,32 +63,35 @@ export function PopularCampaignSlide({ datas, title, scroll, setScroll }: Popula
           <A url="#">전체보기</A>
         </Span>
       </FlexContainer>
-      <div style={{ position: 'relative' }}>
+      <PhotoSlideWrap>
         <ArrowButton type="left top" src={leftArrow} onClick={onLeftClick} top="calc(17.625rem * 0.9 / 2)" />
         <ArrowButton
-          type="left top"
+          type="right top"
           src={rightArrow}
           onClick={onRightClick}
           top="calc(17.625rem * 0.9 / 2)"
-          left="60rem"
+          right="0px"
+          transform="translate(50%, -50%)"
         />
         <SlideContainer ref={scrollRef}>
           {datas.map((data) => (
             <ContentItem
               id={data.id}
+              key={data.id}
               category={data.category}
               type="main"
-              src={data.src}
-              key={data.id}
-              rank={data.rank}
+              // src={data.postImages[0].image}
+              src={data.postImages.length === 0 ? '' : data.postImages[0].image}
+              rank={data.id}
+              // rank={data.rank}
               title={data.title}
               description={data.description}
-              applicationDateStart={data.applicationDateStart}
-              applicationDateEnd={data.applicationDateEnd}
+              applicationDateStart={data.schedule.applicationDateStart}
+              applicationDateEnd={data.schedule.applicationDateEnd}
             />
           ))}
         </SlideContainer>
-      </div>
+      </PhotoSlideWrap>
     </>
   );
 }

@@ -53,7 +53,8 @@ export function ListTemplate({ title, datas }: ListTemplateProps) {
                   applicationDateEnd={post.schedule.applicationDateEnd}
                   channel={post.channel}
                   type="list"
-                  src={post.postImages[0].image}
+                  // src={post.postImages[0].image}
+                  src={post.postImages.length === 0 ? '' : post.postImages[0].image}
                 />
               ))}
             </GridWrap>

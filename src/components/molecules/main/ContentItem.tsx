@@ -71,7 +71,7 @@ export function ContentItem({
     <Container type={type}>
       <A url={`${id}`}>
         <ImgWrap>
-          <img alt="아이템" src={src} />
+          <img alt="캠페인사진" src={src} />
         </ImgWrap>
         {rank ? (
           <RankWrap>

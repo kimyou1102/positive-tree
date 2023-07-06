@@ -6,3 +6,4 @@ export * from './HighlyCampaign';
 export * from './DetailSide';
 export * from './DetailContents';
 export * from './ListHeader';
+export * from './mypage';

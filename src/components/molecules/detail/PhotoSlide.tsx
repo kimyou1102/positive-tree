@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { ArrowButton, SlideContainer } from '@atoms';
+import { ArrowButton, SlideContainer, PhotoSlideWrap } from '@atoms';
 import leftArrow from '../../../assets/images/leftArrow.png';
 import rightArrow from '../../../assets/images/rightArrow.png';
 
@@ -35,7 +35,7 @@ export function PhotoSlide({ datas }: PhotoSlideProps) {
     }
   };
   return (
-    <div style={{ position: 'relative' }}>
+    <PhotoSlideWrap>
       <ArrowButton type="left top" src={leftArrow} onClick={onLeftClick} top="calc(20.625rem * 0.8/ 2)" />
       <ArrowButton
         type="left top"
@@ -50,6 +50,6 @@ export function PhotoSlide({ datas }: PhotoSlideProps) {
           <Img key={data.image} alt="사진" src={data.image} />
         ))}
       </SlideContainer>
-    </div>
+    </PhotoSlideWrap>
   );
 }

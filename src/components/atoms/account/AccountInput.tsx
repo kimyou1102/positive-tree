@@ -19,10 +19,10 @@ export const AccountInput = styled.input<AccountInputProps>`
     font-size: 0.9rem;
   }
 
-  &[type='date']::before {
+  /* &[type='date']::before {
     content: attr(data-placeholder);
     width: 100%;
-  }
+  } */
 
   ${(props) =>
     props.signup &&

@@ -14,6 +14,7 @@ interface Props {
   left?: number;
   bottom?: number;
   wrap?: string;
+  gap?: string;
 }
 
 export const FlexContainer = styled.div<Props>`
@@ -32,6 +33,7 @@ export const FlexContainer = styled.div<Props>`
   bottom: ${(props) => (props.bottom ? `calc(${props.bottom}px * 0.8)` : '0px')};
   left: ${(props) => (props.left ? `calc(${props.left}px * 0.8)` : '0px')};
   overflow-x: ${(props) => (props.overflowX ? props.overflowX : 'visible')};
+  gap: ${(props) => props.gap || '0px'};
   &.slide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -41,5 +43,9 @@ export const FlexContainer = styled.div<Props>`
   }
   &.full {
     width: 100%;
+  }
+
+  &.none {
+    display: none;
   }
 `;

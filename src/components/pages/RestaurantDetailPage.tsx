@@ -5,6 +5,8 @@ import { ListType } from 'src/models/posts';
 import { Span } from '@atoms';
 import { PhotoSlide } from '@molecules';
 import { DetailSide, DetailContents, Footer } from '@organisms';
+import { useRecoilState } from 'recoil';
+import { modalState } from '../../store/detail/modal';
 import { getPost } from '../../apis/post/get-post-api';
 import photo from '../../assets/images/detail.png';
 
@@ -26,6 +28,9 @@ const ContentWrap = styled.div`
 export function RestaurantDetailPage() {
   const [detail, setDetail] = useState<ListType>();
   const { id } = useParams();
+  const [modal, setModal] = useRecoilState(modalState);
+  const [top, setTop] = useState(0);
+
   console.log(id);
 
   const api = useCallback(async () => {
@@ -53,11 +58,11 @@ export function RestaurantDetailPage() {
 
   // const title = '[전라] 유성횟집';
   // const sub = '석양이 잘 보이는 데다가 신선하기까지 한 가성비 횟집!';
-  const requestStartDate = '2023-05-07';
-  const requestEndDate = '2023-05-10';
-  const registerStartDate = '2023-05-15';
-  const registerEndDate = '2023-05-20';
-  const resultDate = '2023-05-21';
+  // const requestStartDate = '2023-05-07';
+  // const requestEndDate = '2023-05-10';
+  // const registerStartDate = '2023-05-15';
+  // const registerEndDate = '2023-05-20';
+  // const resultDate = '2023-05-21';
 
   // const address = '전남 목포시 북항로 190';
   // const provisionDetails = '15만원 식사권 (2인 기준)';
@@ -74,11 +79,11 @@ export function RestaurantDetailPage() {
 
   const title = detail?.title || '';
   const sub = detail?.description || '';
-  // const requestStartDate = detail?.schedule.applicationDateStart || '';
-  // const requestEndDate = detail?.schedule.applicationDateEnd || '';
-  // const registerStartDate = detail?.schedule.contentsDateStart || '';
-  // const registerEndDate = detail?.schedule.contentsDateEnd || '';
-  // const resultDate = detail?.schedule.resultDate || '';
+  const requestStartDate = detail?.schedule.applicationDateStart || '';
+  const requestEndDate = detail?.schedule.applicationDateEnd || '';
+  const registerStartDate = detail?.schedule.contentsDateStart || '';
+  const registerEndDate = detail?.schedule.contentsDateEnd || '';
+  const resultDate = detail?.schedule.resultDate || '';
 
   const address = detail?.address || '';
   const provisionDetails = detail?.provision || '';
@@ -115,7 +120,7 @@ export function RestaurantDetailPage() {
 
   return (
     <>
-      <div style={{ width: 'calc(100% - ((100% - 60rem)/2))', margin: '4rem 0 0 auto', paddingLeft: '3rem' }}>
+      <div style={{ width: '60rem', margin: '0 auto' }}>
         <TitleWrap>
           <Span weight="bold" size={1.625} margin="0 0 0.5rem 0">
             {title}
@@ -130,7 +135,7 @@ export function RestaurantDetailPage() {
           <DetailContents {...contentsProps} />
         </div>
         <div>
-          <DetailSide {...slideProps} />
+          <DetailSide {...slideProps} setTop={setTop} />
         </div>
       </ContentWrap>
       <Footer />
