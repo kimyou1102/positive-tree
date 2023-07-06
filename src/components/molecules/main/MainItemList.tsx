@@ -32,10 +32,10 @@ export function MainItemList() {
       <A url="/product">
         <MainItem imgWidth={55} imgHeight={49} src={icon6} title="포인트" />
       </A>
-      <MainItem imgWidth={100} imgHeight={100} src={icon7} title="기자단" />
-      <MainItem imgWidth={100} imgHeight={100} src={icon8} title="기타체험" />
+      <MainItem imgWidth={60} imgHeight={60} src={icon7} title="기자단" />
+      <MainItem imgWidth={55} imgHeight={50} src={icon8} title="기타체험" />
       <MainItem imgWidth={49} imgHeight={51} src={icon9} title="광고문의" />
-      <MainItem imgWidth={100} imgHeight={100} src={icon10} title="이용가이드" />
+      <MainItem imgWidth={50} imgHeight={50} src={icon10} title="이용가이드" />
     </Container>
   );
 }

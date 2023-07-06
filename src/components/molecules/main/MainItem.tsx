@@ -34,7 +34,7 @@ export function MainItem({ src, title, imgWidth, imgHeight }: MainItemProps) {
       <Container imgWidth={imgWidth} imgHeight={imgHeight}>
         <img src={src} alt={`${title}아이콘`} />
       </Container>
-      <Span size={0.875} margin="0.4rem 0 0 0">
+      <Span size={0.875} weight="bold" margin="0.4rem 0 0 0">
         {title}
       </Span>
     </FlexContainer>
