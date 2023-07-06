@@ -7,3 +7,4 @@ export * from './LoginPage';
 export * from './SignupPage';
 export * from './KakaoAuthHandler';
 export * from './KakaoSignupPage';
+export * from './mypage';

@@ -34,7 +34,7 @@ export function UserButton() {
       {isLogin ? (
         <>
           <StyledButton onClick={() => onClick()}>로그아웃</StyledButton>
-          <StyledButton onClick={() => navigate('#')}>마이페이지</StyledButton>
+          <StyledButton onClick={() => navigate('/mypage')}>마이페이지</StyledButton>
         </>
       ) : (
         <>

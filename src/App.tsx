@@ -11,8 +11,11 @@ import {
   SignupPage,
   KakaoAuthHandler,
   KakaoSignupPage,
+  MyPageDefault,
+  MyInfomationPage,
 } from '@pages';
-import { Header } from '@organisms';
+import { Header, MediaLink } from '@organisms';
+import { MyPageTemplate } from '@templates';
 
 function App() {
   return (
@@ -26,6 +29,11 @@ function App() {
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/mypage" element={<MyPageTemplate />}>
+          <Route path="/mypage" element={<MyPageDefault />} />
+          <Route path="/mypage/information" element={<MyInfomationPage />} />
+          <Route path="/mypage/media" element={<MediaLink />} />
+        </Route>
         <Route path="/kakao_login" element={<KakaoAuthHandler />} />
         <Route path="/kakao_signup" element={<KakaoSignupPage />} />
       </Route>

@@ -1,6 +1,4 @@
-export * from './A';
 export * from './Input';
-export * from './FlexContainer';
 export * from './H3';
 export * from './Span';
 export * from './ArrowButton';
@@ -8,3 +6,5 @@ export * from './SlideContainer';
 export * from './Ul';
 export * from './PhtoSlideWrap';
 export * from './ModalWrap';
+export * from './Section';
+export * from './common';

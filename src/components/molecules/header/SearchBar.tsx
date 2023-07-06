@@ -11,7 +11,7 @@ interface SearchBarProps {
 
 const Container = styled.div`
   height: 2rem;
-  width: 13rem;
+  width: 15rem;
   display: flex;
   align-items: center;
   border-radius: 20px;

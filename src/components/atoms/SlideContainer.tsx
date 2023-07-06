@@ -1,6 +1,6 @@
 import React, { ForwardedRef, forwardRef } from 'react';
 import styled from 'styled-components';
-import { FlexContainer } from './FlexContainer';
+import { FlexContainer } from './common';
 
 interface PropsType {
   children: React.ReactNode;
